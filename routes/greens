@@ -1,0 +1,25 @@
+import express from 'express';
+
+// const routergreens = express.Router();
+
+// routergreens.get('/api/greens', async(req, res) => {
+//   try {
+//     const allgreens = await saladbar.findAll(greens)
+//   }catch(err){
+//     console.log(err);
+//   }
+// })
+
+// routergreens.post('/', () => {
+
+// })
+
+// routergreens.put('/', () => {
+
+// })
+
+// routergreens.delete('/', () => {
+
+// })
+
+// module.exports = routergreens;

@@ -2,6 +2,9 @@ import express from "express";
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 import {Greens, Protein, Carb, Topping, Dressing} from "./model.js"
+//  import {routergreens} from "./routes/greens"
+import cors from 'cors'
+import { createBrotliCompress } from "zlib";
 
 
 const app = express();
@@ -9,6 +12,9 @@ dotenv.config();
 
 const PORT = process.env.PORT ||  5000; //to use 5000 as default port if original port is in use.
 const MONGOURL = process.env.MONGO_URL;
+
+ app.use(cors());//to allow the front end fetch data from the backend
+ app.use(express.json());//to convert data to json
 
 //connection to database
 function mongodb() {
@@ -22,8 +28,8 @@ mongoose.connect(MONGOURL).then(()=>{
 
 }
  mongodb();
-// app.use(express.json());
-// app.use(cors());
+
+
 
 //array for greens
  const saladIgredientGreens= [{
@@ -192,3 +198,46 @@ Greens.insertMany(saladIgredientGreens)
     .catch(error => {
         console.log(error);
     })
+
+    // app.use(routergreens);
+    
+    //creating api routes to access data in mongodb below
+
+    //routes for greens
+
+app.get('/getgreens', (req, res) => {  //well, regardless of the error E11000, greens is still been fetched from the database. Tested. It works, so lets 'pamper' the code and work with it.
+    Greens.find()
+    .then(greens => res.json(greens))
+    .catch(err => res.json(err))
+})
+
+
+
+//routes protein
+app.get('/getproteins', (req, res) => {
+    Protein.find()
+     .then(proteins => res.json(proteins))//fetch info from database and convert it to json format
+     .catch(err => res.json(err))
+})
+
+
+//carb
+app.get('/getcarbs', (req, res) => {
+    Carb.find()
+    .then(carbs => res.json(carbs))//fetch info from database and convert it to json format
+    .catch(err => res.json(err))
+})
+
+//topping
+app.get('/gettopping', (req, res) => {
+    Topping.find()
+    .then(toppings => res.json(toppings))
+    .catch(err => res.json(err))
+})
+
+//dressing
+app.get('/getdressing', (req, res) => {
+    Dressing.find()
+    .then(dressings => res.json(dressings))
+    .catch(err => res.json(err))
+})
