@@ -6,3 +6,4 @@ The technologies used were ;
 -Cors, to link the frontend to the backend
 -POSTMAN to test/check the endpoints.
 Schemas were used to establish the different item categories in the database.
+link to deployed backend on netlify: https://jovial-parfait-c4bcca.netlify.app
